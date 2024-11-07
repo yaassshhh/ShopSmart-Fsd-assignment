@@ -35,16 +35,12 @@ public class ItemController {
 			User user =  userService.verifyLogin(username,password);
 			
 				session.setAttribute("username", username);
-				//fetch all courses
+				//fetch all items 
 				List<Items> items =  itemService.fetchAllItems();
-				//List listCourses courseService.fetchAllCourses();
+
 				req.setAttribute("listItems", items);
-				
-//				//fetch all enrolled course 
-//				List<Course> enrolledCourses =  courseService.getEnrolledCourses(session.getAttribute("username"));
-//				req.setAttribute("enrolledCourses", enrolledCourses);
-				
 				return "dashboard"; 
+
 		} catch (InvalidCredentialsException e) {
 			req.setAttribute("msg",e.getMessage());
 			return "login";
@@ -53,14 +49,9 @@ public class ItemController {
 	
 	@GetMapping("/dashboard")
 	public String goToDashboard(HttpServletRequest req,HttpSession session) {
-		//fetch all courses
+		//fetch all items 
 		List<Items> items =  itemService.fetchAllItems();
-		//List listCourses courseService.fetchAllCourses();
 		req.setAttribute("listItems", items);
-		
-		//fetch all enrolled course 
-//		List<Course> enrolledCourses =  courseService.getEnrolledCourses(session.getAttribute("username"));
-//		req.setAttribute("enrolledCourses", enrolledCourses);
 		return "dashboard";
 	}
 	
